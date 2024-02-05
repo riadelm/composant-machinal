@@ -1,7 +1,7 @@
 html, body, #root {
   height: 100%;
+  width: 100%;
   margin: 0;
-  overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,11 +9,13 @@ html, body, #root {
 
 .MainSpace {
   height: 100%;
+  width: 100%;
 }
 
 .App {
   text-align: center;
   height: 100%;
+  width: 100%;
 }
 
 .App-logo {

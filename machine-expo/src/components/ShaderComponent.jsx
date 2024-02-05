@@ -142,7 +142,7 @@ const ShaderComponent = () => {
       vNormal = normal;
       // Adjust 'time' and 'position' scaling for more "hectic" effects
       float noiseValue = fractalNoise(position + time * 0.5);
-      vec3 newPosition = position + normal * noiseValue * 0.2; // Control the effect intensity
+      vec3 newPosition = position + normal * noiseValue * 1.8; // Control the effect intensity
       gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
     }
     `,
@@ -151,7 +151,7 @@ const ShaderComponent = () => {
 
     void main() {
       vec3 lightDirection = normalize(vec3(1, 1, 1));
-      float lightIntensity = dot(vNormal, lightDirection) * 0.5 + 0.5;
+      float lightIntensity = dot(vNormal, lightDirection) * 0.7 + 0.5;
       gl_FragColor = vec4(lightIntensity, lightIntensity, lightIntensity, 1.0);
     }
     `,
