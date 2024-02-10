@@ -1,52 +1,73 @@
-import React, { useRef, useMemo} from 'react';
+import React, { useRef, useMemo, useState, useEffect, useCallback} from 'react';
 import { useFrame } from '@react-three/fiber';
 // import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import vertexShader from '../shaders/vertexShader.js';
 import fragmentShader from '../shaders/fragmentShader.js';
 
+const targetFPS = 30; // Target framerate (e.g., 30 FPS for throttling)
+const frameInterval = 1 / targetFPS;
 
 const DimensionComponent = () => {
-  const mesh = useRef();
-  const hover = useRef(false);
+  const mouseRef = useRef([0, 0]);
+  const shaderMaterialRef = useRef();
+  const lastUpdateTimeRef = useRef(0);
 
-  const uniforms = useMemo(
-    () => ({
-      u_intensity: {
-        value: 0.3,
-      },
-      u_time: {
-        value: 0.0,
-      },
-    }),
-    []
-  );
+  const handleMouseMove = useCallback((event) => {
+    const x = (event.clientX / window.innerWidth) * 2 - 1;
+    const y = -(event.clientY / window.innerHeight) * 2 + 1;
+    mouseRef.current = [x, y];
+  }, [mouseRef]);
 
-  useFrame((state) => {
-    const { clock } = state;
-    mesh.current.material.uniforms.u_time.value = 0.4 * clock.getElapsedTime();
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove);
+    return () => window.removeEventListener('mousemove', handleMouseMove);
+  }, [handleMouseMove]);
 
-    mesh.current.material.uniforms.u_intensity.value = THREE.MathUtils.lerp(
-      mesh.current.material.uniforms.u_intensity.value,
-      hover.current ? 0.85 : 0.15,
-      0.02
-    );
+  useEffect(() => {
+    const handleResize = () => {
+      const { innerWidth, innerHeight } = window;
+      const shaderMaterial = shaderMaterialRef.current;
+      if (shaderMaterial) {
+        shaderMaterial.uniforms.resolution.value = [innerWidth, innerHeight];
+      }
+    };
+  
+    window.addEventListener('resize', handleResize);
+    handleResize(); // Initialize with current size
+  
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+  
+
+  
+  const uniforms = useMemo(() => ({
+    time: { value: 0 },
+    resolution: { value: new THREE.Vector3(window.innerWidth, window.innerHeight, 1) },
+    mouse: { value: mouseRef.current},
+  }), [mouseRef.current]);
+
+  useFrame(({ clock, size }) => {
+    const elapsedTime = clock.getElapsedTime();
+    if (elapsedTime - lastUpdateTimeRef.current > frameInterval) {
+      const shaderMaterial = shaderMaterialRef.current;
+      if (shaderMaterial) {
+        shaderMaterial.uniforms.time.value = elapsedTime;
+        shaderMaterial.uniforms.resolution.value = [size.width, size.height];
+        shaderMaterial.uniforms.mouse.value = mouseRef.current;
+      }
+      lastUpdateTimeRef.current = elapsedTime;
+    }
   });
 
   return (
-    <mesh
-      ref={mesh}
-      position={[0, 0, 0]}
-      scale={1.5}
-      onPointerOver={() => (hover.current = true)}
-      onPointerOut={() => (hover.current = false)}
-    >
-      <icosahedronGeometry args={[2, 20]} />
+    <mesh>
+      <planeGeometry args={[2, 2]} />
       <shaderMaterial
-        fragmentShader={fragmentShader}
+        ref={shaderMaterialRef}
         vertexShader={vertexShader}
+        fragmentShader={fragmentShader}
         uniforms={uniforms}
-        wireframe={false}
       />
     </mesh>
   );
