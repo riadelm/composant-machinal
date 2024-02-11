@@ -54,12 +54,30 @@ html, body, #root {
   top: 0;
   left: 0;
   margin: 20px;
-  font-family: 'Helvetica Neue', Helvetica Arial sans-serif;
-  font-size: 48px;
-  color: rgb(240, 240, 240);
+  font-family: "Readex Pro","Neuzeit","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  font-size: 52px;
+  color: rgb(255, 255, 255);
   z-index: 1;
+  transition: font-size color 0.5s ease;
+}
+
+.apply-button {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 20px;
+  color: white; /* Adjust color as needed */
+  font-family: "Readex Pro","Neuzeit","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-weight: 400;
+  font-size: 48px;
+  z-index: 1;
+  text-decoration: none; /* Remove underline by default */
   cursor: pointer;
-  transition: font-size 0.2s ease;
+}
+
+.apply-button:hover {
+  text-decoration: underline; /* Underline on hover */
 }
 
 .overlay {
@@ -74,11 +92,15 @@ html, body, #root {
 }
 
 .title:hover ~ .overlay {
-  backdrop-filter: blur(20px); /* Apply blur when title is hovered */
+  backdrop-filter: blur(30px) brightness(80%); /* Apply blur when title is hovered */
+}
+.apply-button:hover ~ .overlay {
+  backdrop-filter: blur(30px) brightness(50%); /* Apply blur when title is hovered */
 }
 
 .title:hover {
   font-size: 52px;
+  color: rgb(255, 255, 255);
 }
 
 

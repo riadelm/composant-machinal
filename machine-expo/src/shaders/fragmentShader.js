@@ -26,7 +26,7 @@ vec2 generatePoint(int index, float t) {
 }
 
 vec3 image(vec2 st, float t) {
-    vec3 color = vec3(1.0); // Start with a gray background
+    vec3 color = vec3(0.9); // Start with a gray background
     float minDist = 2.0;
     vec2 nearestPoint;
     float nearestDist = 10000.0; // Start with a large initial value

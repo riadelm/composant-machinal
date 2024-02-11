@@ -1,0 +1,98 @@
+/* Reset some default styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#root, body, html {
+    margin: 0;
+    font-family: 'Roboto', sans-serif; /* Example using Roboto, ensure it's included in your project */
+    background-color: #f5f5f5; /* Soft gray background */
+    color: #333; /* Dark gray text for readability */
+    font-size: 16px; /* Base font size */
+    line-height: 1.6; /* Improve text readability */
+    height: 100%; /*Ensure full page height */
+    width: 100%;
+    overflow: visible;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align to top */
+    height: 100vh;
+    width: 100%; 
+    padding: 40px 20px; /* Padding for some breathing room */
+}
+
+.application-form {
+    background-color: #f0f0f0;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+    width: 100%;
+    max-width: 45vw; /* Maximum width of the form */
+    margin: 0 auto; /* Center the form on the page */
+    overflow: visible;
+}
+
+.application-form h2 {
+    /* scroll-margin-top: 100px; */
+    margin-bottom: 2rem; /* Space below the form title */
+    color: #333; /* Title color */
+    font-weight: 300; /* Lighter font weight for the title */
+}
+
+.form-group {
+    margin-bottom: 1rem; /* Space between form groups */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: .5rem; /* Small space between label and input */
+    font-weight: bold; /* Emphasize labels */
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"],
+.form-group textarea,
+.form-group input[type="file"] {
+    width: 100%; /* Full width inputs */
+    padding: 10px;
+    border: 1px solid #ccc; /* Subtle border */
+    border-radius: 4px; /* Rounded corners */
+    margin-bottom: .5rem; /* Space for potential error message */
+}
+
+.form-group textarea {
+    height: 120px; /* Larger text area for bio */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+/* Styling for radio buttons and conditional text input */
+.form-group input[type="radio"] {
+    margin-right: 5px; /* Space out radio buttons */
+}
+
+button[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1rem;
+}
+
+button[type="submit"]:hover {
+    background-color: #444; /* Darker on hover */
+}
+
+/* Error message styling */
+span {
+    color: #d32f2f; /* Red color for errors */
+    font-size: 0.875rem; /* Smaller font size for errors */
+}

@@ -1,25 +1,19 @@
 import React from 'react';
-import { Canvas } from '@react-three/fiber';
+//import { Canvas } from '@react-three/fiber';
 //import ShaderComponent from './components/ShaderComponent'; // Adjust the path as necessary
-import DimensionComponent from './components/DimensionComponent'; // Adjust the path as necessary
+//import DimensionComponent from './components/DimensionComponent'; // Adjust the path as necessary
+import { Routes, Route } from 'react-router-dom';
+import ApplicationForm from './views/ApplicationForm.js'; // Import the new page component
+import HomePage from './views/HomePage.js';
 import './App.css'
 
-function App() {
-  const { innerWidth: width, innerHeight: height } = window;
+const App = () => {
   return (
-    <div className="App">
-      <Canvas className="MainSpace" camera={{ position: [0, 0, 1], aspect: width / height, fov: 75 }} gl={{ antialias: false, stencil: false, depth: false }} >
-        <ambientLight intensity={0.5} />
-        <DimensionComponent />
-      </Canvas>
-      <div
-        className="title"
-      >
-        Composant Machinal Montréal
-      </div>
-      <div className="overlay"></div> {/* Overlay added here */}
-    </div>
+    <Routes>
+      <Route path="/" element={<HomePage />} /> {/* Assume HomePage is your main component */}
+      <Route path="/apply" element={<ApplicationForm />} />
+    </Routes>
   );
-}
+};
 
 export default App;
