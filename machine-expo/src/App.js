@@ -15,7 +15,7 @@ function App() {
       <div
         className="title"
       >
-        Composant Machinal Montreal
+        Composant Machinal Montréal
       </div>
       <div className="overlay"></div> {/* Overlay added here */}
     </div>

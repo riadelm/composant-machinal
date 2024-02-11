@@ -5,9 +5,12 @@ html, body, #root {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(127.5, 127.5, 127.5);
+  
 }
 
 .MainSpace {
+  background-color: rgb(127.5, 127.5, 127.5);
   height: 100%;
   width: 100%;
 }
@@ -39,7 +42,7 @@ html, body, #root {
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: rgb(195, 195, 195);
 }
 
 .App-link {
@@ -53,7 +56,7 @@ html, body, #root {
   margin: 20px;
   font-family: 'Helvetica Neue', Helvetica Arial sans-serif;
   font-size: 48px;
-  color: black;
+  color: rgb(240, 240, 240);
   z-index: 1;
   cursor: pointer;
   transition: font-size 0.2s ease;
