@@ -18,7 +18,7 @@ float rand(vec2 co) {
 // Function to generate a point position
 vec2 generatePoint(int index, float t) {
 	float angle = 3.14159265 * 2.0 * float(index) / float(MAX_POINTS);
-    float radius = 0.4 + 0.1 * sin(float(index) * 1.1 + t * 0.2);
+    float radius = 0.01 + 0.7 * sin(float(index) * 1.7 + t * 0.4);
     vec2 position = vec2(sin(angle), cos(angle)) * radius;
     position += vec2(sin(t * 0.1 + float(index)), cos(t * 0.1 + float(index))) * 0.1;
     position = clamp(position, -0.9, 0.9);
