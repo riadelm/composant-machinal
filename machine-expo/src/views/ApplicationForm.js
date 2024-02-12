@@ -1,5 +1,6 @@
 import React from 'react';
-import { useForm } from 'react-hook-form'
+import { useForm } from 'react-hook-form';
+import emailjs from 'emailjs-com';
 import './ApplicationForm.css'
 
 const ApplicationForm = () => {
@@ -8,7 +9,27 @@ const ApplicationForm = () => {
 
     const onSubmit = data => {
         console.log(data);
-        // Here you will handle form submission, e.g., integrating with Email.js
+        const formData = {
+            fullName: data.fullName,
+            email: data.email,
+            pronouns: data.pronouns,
+            dob: data.dob,
+            location: data.location,
+            artistBio: data.artistBio,
+            // For file: handle separately as Email.js cannot send files directly
+            affiliation: data.affiliation,
+            affiliationDetails: data.affiliationDetails,
+            additionalInfo: data.additionalInfo
+        };
+
+        emailjs.send('service_xv9wkqe', 'template_zujncxw', formData, 'slEBWGhWka7S9f55f')
+            .then((result) => {
+                console.log(result.text);
+                alert("Application submitted successfully!");
+            }, (error) => {
+                console.log(error.text);
+                alert("Failed to submit the application. Please try again.");
+            });
     };
     return (
         <div className="form-container">
