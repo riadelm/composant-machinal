@@ -26,12 +26,12 @@ vec2 generatePoint(int index, float t) {
 }
 
 vec3 image(vec2 st, float t) {
-    vec3 color = vec3(0.9); // Start with a gray background
+    vec3 color = vec3(0.0, 1.0, 0.0); // Start with a gray background
     float minDist = 2.0;
     vec2 nearestPoint;
     float nearestDist = 10000.0; // Start with a large initial value
 
-    int currentPoints = min(int(t / 2.0), MAX_POINTS); // Current number of points based on time
+    int currentPoints = min(int(t / 0.2), MAX_POINTS); // Current number of points based on time
 
     for(int i = 0; i < MAX_POINTS; ++i) {
         if(i < currentPoints) {
@@ -51,7 +51,7 @@ vec3 image(vec2 st, float t) {
     if(nearestDist < 0.1 && distance(mouse, nearestPoint) < 0.1) {
         color = vec3(0.0, 1.0, 0.0); // Primary green for nearest point to mouse
     } else {
-        color = mix(color, vec3(0.3, 0.28, 0.3), smoothstep(0.0, 0.15, minDist));
+        color = mix(color, vec3(0.09, 0.07, 0.09), smoothstep(0.0, 0.15, minDist));
     }
 
     return color;
