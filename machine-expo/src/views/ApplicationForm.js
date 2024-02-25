@@ -36,7 +36,7 @@ const ApplicationForm = () => {
     };
     return (
         <div className="Apply">
-            <Canvas className="MainSpace" camera={{ position: [0, 0, 1], aspect: width / height, fov: 85 }} gl={{ antialias: false, stencil: false, depth: false }} >
+            <Canvas className="MainSpace" camera={{ position: [0, 0, 1], aspect: width / height, fov: 100 }} gl={{ antialias: false, stencil: false, depth: false }} >
                 <ambientLight intensity={0.5} />
                 <DimensionComponent />
             </Canvas>

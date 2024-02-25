@@ -17,7 +17,8 @@ float rand(vec2 co) {
 
 // Function to generate a point position
 vec2 generatePoint(int index, float t, vec2 mousePos) {
-	float angle = 3.14159265 * 2.0 * float(index) / float(MAX_POINTS);
+	float angle = 3.14159265 * 1.0 * float(index) / float(MAX_POINTS);
+    //float aspectRatio = resolution.x / resolution.y;
     float radius = 0.01 + 0.7 * sin(float(index) * 1.7 + t * 0.4);
     vec2 position = vec2(sin(angle), cos(angle)) * radius;
     position += vec2(sin(t * 0.1 + float(index)), cos(t * 0.1 + float(index))) * 0.1;
@@ -60,8 +61,11 @@ vec3 image(vec2 st, float t) {
 
 void main() {
     float aspectRatio = resolution.x / resolution.y;
-    vec2 uv = (vUv - 0.5) * vec2(aspectRatio, 1.0);
-    vec2 pos = uv * 1.5;
+    vec2 uv = vUv;
+    //uv.x *= aspectRatio; // Scale uv.x based on aspect ratio
+
+    vec2 pos = uv - 0.5;
+    pos.x *= aspectRatio; // Ensure uniform scaling in x-direction
     gl_FragColor = vec4(image(pos, time), 1.0);
 }
 `;

@@ -2,7 +2,7 @@ html, body, #root {
   height: 100%;
   width: 100%;
   margin: 0;
-  display: flex;
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   background-color: rgb(127.5, 127.5, 127.5);
@@ -11,8 +11,9 @@ html, body, #root {
 
 .MainSpace {
   background-color: rgb(127.5, 127.5, 127.5);
-  height: 100%;
+  height: auto;
   width: 100%;
+  flex: 1 1 auto;
 }
 
 .App {

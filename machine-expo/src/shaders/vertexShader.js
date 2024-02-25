@@ -3,7 +3,8 @@ varying vec2 vUv;
 
 void main() {
   vUv = uv;
-  gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 0.5);
+  vec4 screenSpacePosition = vec4(position.xy, 0.0, 1.0);
+  gl_Position = screenSpacePosition;
 }
 `;
 export default vertexShader;

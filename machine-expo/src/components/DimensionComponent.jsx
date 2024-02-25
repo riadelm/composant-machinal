@@ -1,22 +1,22 @@
-import React, { useRef, useMemo, useState, useEffect, useCallback} from 'react';
-import { useFrame } from '@react-three/fiber';
+import React, { useRef, useMemo, useEffect, useCallback} from 'react';
+import { useFrame, useThree } from '@react-three/fiber';
 // import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import vertexShader from '../shaders/vertexShader.js';
 import fragmentShader from '../shaders/fragmentShader.js';
 
-const targetFPS = 30; // Target framerate (e.g., 30 FPS for throttling)
+const targetFPS = 30; 
 const frameInterval = 1 / targetFPS;
 
 const DimensionComponent = () => {
-  const mouseRef = useRef([0, 0]);
+  const mouseRef = useRef(new THREE.Vector2());
   const shaderMaterialRef = useRef();
   const lastUpdateTimeRef = useRef(0);
+  const { size } = useThree();
 
   const handleMouseMove = useCallback((event) => {
-    const x = (event.clientX / window.innerWidth) * 2 - 1;
-    const y = -(event.clientY / window.innerHeight) * 2 + 1;
-    mouseRef.current = [x, y];
+    mouseRef.current.x = (event.clientX / window.innerWidth) * 2 - 1;
+    mouseRef.current.y = -(event.clientY / window.innerHeight) * 2 + 1;
   }, [mouseRef]);
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const DimensionComponent = () => {
         shaderMaterial.uniforms.resolution.value = [innerWidth, innerHeight];
       }
     };
-  
+    
     window.addEventListener('resize', handleResize);
     handleResize(); // Initialize with current size
   
@@ -43,9 +43,9 @@ const DimensionComponent = () => {
   
   const uniforms = useMemo(() => ({
     time: { value: 0 },
-    resolution: { value: new THREE.Vector3(window.innerWidth, window.innerHeight, 1) },
+    resolution: { value: new THREE.Vector2(size.width, size.height) },
     mouse: { value: mouseRef.current},
-  }), [mouseRef.current]);
+  }), [size.width, size.height]);
 
   useFrame(({ clock, size }) => {
     const elapsedTime = clock.getElapsedTime();
@@ -54,7 +54,6 @@ const DimensionComponent = () => {
       if (shaderMaterial) {
         shaderMaterial.uniforms.time.value = elapsedTime;
         shaderMaterial.uniforms.resolution.value = [size.width, size.height];
-        shaderMaterial.uniforms.mouse.value = mouseRef.current;
       }
       lastUpdateTimeRef.current = elapsedTime;
     }

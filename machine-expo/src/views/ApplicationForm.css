@@ -38,12 +38,13 @@
     position: static;
     transform: translate(-0%, -100%); /* Center the form container */
     z-index: 2; /* Ensure it's above the canvas */
-    height: 100vh;
-    width: 100%; 
+    height: 95vh;
+    width: 60vw; 
     padding: 20px 40px;
     background-color: rgba(255, 255, 255, 0);
-    max-width: 45vw; /* Maximum width of the form */
-    margin: 0 auto; /* Center the form on the page */
+    max-width: 80vw; /* Maximum width of the form */
+    min-width: 45vw; 
+    margin: auto auto; /* Center the form on the page */
     box-sizing: border-box;
     justify-content: center;
     display: flex;
@@ -58,7 +59,7 @@
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
     overflow-y: auto;
-    max-height: 95vh;
+    max-height: 85vh;
     z-index: 100;
 }
 
@@ -121,4 +122,39 @@ button[type="submit"]:hover {
 span {
     color: #d32f2f; /* Red color for errors */
     font-size: 0.875rem; /* Smaller font size for errors */
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        width: 90vw; /* Adjust form width on smaller screens */
+        padding: 20px 20px; /* Reduce padding on smaller screens */
+        /* transform: none; Adjust or remove transform if needed */
+        margin-top: 0vh; /* Add some top margin for spacing */
+        margin-bottom: 8vh;
+        max-width: 90vw; /* Increase maximum width for smaller screens */
+        min-width: 0; /* Remove minimum width constraint */
+    }
+
+    .application-form {
+        max-height: 85vh; /* Remove max-height to allow form to take necessary space */
+        padding: 1.5rem; /* Reduce padding */
+    }
+
+    .application-form h2 {
+        font-size: 1.5rem; /* Adjust title font size for smaller screens */
+    }
+
+    .form-group label,
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="date"],
+    .form-group textarea,
+    .form-group input[type="file"],
+    button[type="submit"] {
+        font-size: 0.9rem; /* Adjust font size for better readability on smaller screens */
+    }
+
+    .form-group textarea {
+        height: 100px; /* Adjust textarea height */
+    }
 }

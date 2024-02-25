@@ -9,7 +9,7 @@ const HomePage = () => {
   const { innerWidth: width, innerHeight: height } = window;
   return (
     <div className="App">
-      <Canvas className="MainSpace" camera={{ position: [0, 0, 1], aspect: width / height, fov: 75 }} gl={{ antialias: false, stencil: false, depth: false }} >
+      <Canvas className="MainSpace" camera={{ position: [0, 0, 1], aspect: width / height, fov: 100 }} gl={{ antialias: false, stencil: false, depth: false }} >
         <ambientLight intensity={0.5} />
         <DimensionComponent />
       </Canvas>
