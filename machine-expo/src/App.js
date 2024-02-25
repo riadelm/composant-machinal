@@ -7,6 +7,14 @@ import ApplicationForm from './views/ApplicationForm.js'; // Import the new page
 import HomePage from './views/HomePage.js';
 import './App.css'
 
+// TODO: 
+// - blurry green hover
+// - colors the atoms and stays colored green
+// - no more harsh hover effect
+// - smaller atoms for form in the background - use same font
+// scale everything on phone!!
+// form = transparent but brightness-- and background is same as landing page
+// make sure it's still readable 
 const App = () => {
   return (
     <Routes>

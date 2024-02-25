@@ -8,7 +8,7 @@ uniform vec2 resolution;
 varying vec2 vUv;
 
 // Define a maximum number of points and a highlight duration
-const int MAX_POINTS = 50;
+const int MAX_POINTS = 60;
 const float HIGHLIGHT_DURATION = 5.0;
 
 float rand(vec2 co) {
@@ -16,12 +16,23 @@ float rand(vec2 co) {
 }
 
 // Function to generate a point position
-vec2 generatePoint(int index, float t) {
+vec2 generatePoint(int index, float t, vec2 mousePos) {
 	float angle = 3.14159265 * 2.0 * float(index) / float(MAX_POINTS);
     float radius = 0.01 + 0.7 * sin(float(index) * 1.7 + t * 0.4);
     vec2 position = vec2(sin(angle), cos(angle)) * radius;
     position += vec2(sin(t * 0.1 + float(index)), cos(t * 0.1 + float(index))) * 0.1;
-    position = clamp(position, -0.9, 0.9);
+    
+    // Convert mouse position from screen space [-1, 1] to shader space [0, 1]
+    vec2 mouseNormalized = mousePos * 0.5 + 0.5;
+    vec2 posNormalized = position * 0.5 + 0.5;
+    
+    if(distance(mouseNormalized, posNormalized) < 0.07) { // Check if mouse is close to the point
+        // Apply a small shake effect
+        float shakeIntensity = 0.03; // Adjust the intensity as needed
+        position += vec2(sin(t * 54.0) * shakeIntensity, cos(t * 43.0) * shakeIntensity);
+    }
+
+    //position = clamp(position, -0.9, 0.9);
     return position;
 }
 
@@ -35,24 +46,14 @@ vec3 image(vec2 st, float t) {
 
     for(int i = 0; i < MAX_POINTS; ++i) {
         if(i < currentPoints) {
-            vec2 point = generatePoint(i, t);
+            vec2 point = generatePoint(i, t, mouse);
             // Calculate a pseudo-random phase offset for each point
             float dist = distance(st, point); // Apply size modulation
-
-            if(dist < nearestDist) {
-                nearestDist = dist;
-                nearestPoint = point;
-            }
             minDist = min(minDist, dist);
         }
     }
 
-    // Color adjustment for the nearest point or default coloring
-    if(nearestDist < 0.1 && distance(mouse, nearestPoint) < 0.1) {
-        color = vec3(0.0, 1.0, 0.0); // Primary green for nearest point to mouse
-    } else {
-        color = mix(color, vec3(0.09, 0.07, 0.09), smoothstep(0.0, 0.15, minDist));
-    }
+    color = mix(color, vec3(0.09, 0.07, 0.09), smoothstep(0.0, 0.15, minDist));
 
     return color;
 }
