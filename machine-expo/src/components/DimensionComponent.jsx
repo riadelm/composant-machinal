@@ -29,7 +29,7 @@ const DimensionComponent = () => {
       const { innerWidth, innerHeight } = window;
       const shaderMaterial = shaderMaterialRef.current;
       if (shaderMaterial) {
-        shaderMaterial.uniforms.resolution.value = [innerWidth, innerHeight];
+        shaderMaterial.uniforms.resolution.value.set(innerWidth, innerHeight);
       }
     };
     
@@ -45,7 +45,7 @@ const DimensionComponent = () => {
     time: { value: 0 },
     resolution: { value: new THREE.Vector2(size.width, size.height) },
     mouse: { value: mouseRef.current},
-  }), [size.width, size.height]);
+  }), []);
 
   useFrame(({ clock, size }) => {
     const elapsedTime = clock.getElapsedTime();
@@ -53,7 +53,8 @@ const DimensionComponent = () => {
       const shaderMaterial = shaderMaterialRef.current;
       if (shaderMaterial) {
         shaderMaterial.uniforms.time.value = elapsedTime;
-        shaderMaterial.uniforms.resolution.value = [size.width, size.height];
+        shaderMaterial.uniforms.resolution.value.set(size.width, size.height);
+        shaderMaterial.uniforms.mouse.value = mouseRef.current;
       }
       lastUpdateTimeRef.current = elapsedTime;
     }
