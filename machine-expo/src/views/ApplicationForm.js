@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import emailjs from 'emailjs-com';
 import './ApplicationForm.css';
 import DimensionComponent from '../components/DimensionComponent';
 import { Canvas } from '@react-three/fiber';
+import * as LR from '@uploadcare/blocks';
+import { Widget } from '@uploadcare/react-widget';
+
+LR.registerBlocks(LR);
 
 const ApplicationForm = () => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const isAffiliated = watch("affiliation", "no"); // Watching the radio button
     const { innerWidth: width, innerHeight: height } = window;
+    const [fileUrl, setFileUrl] = useState('')
 
     const onSubmit = data => {
         console.log(data);
@@ -19,11 +24,13 @@ const ApplicationForm = () => {
             dob: data.dob,
             location: data.location,
             artistBio: data.artistBio,
+            fileUrl: fileUrl,
             //upload file request from dropbox or ask for follow up email with 
             affiliation: data.affiliation,
             affiliationDetails: data.affiliationDetails,
             additionalInfo: data.additionalInfo
         };
+        console.log(formData)
 
         emailjs.send('service_xv9wkqe', 'template_zujncxw', formData, 'slEBWGhWka7S9f55f')
             .then((result) => {
@@ -43,6 +50,7 @@ const ApplicationForm = () => {
             <div className="form-container">
                 <form className="application-form" onSubmit={handleSubmit(onSubmit)}>
                     <h2>Open Call for Artists - Application Form</h2>
+                    <h2>Deadline: March 31st 2024</h2>
                     <div className="form-group">
                         <label htmlFor="fullName">Full Name</label>
                         <input type="text" id="fullName" {...register("fullName", { required: true })} />
@@ -77,11 +85,17 @@ const ApplicationForm = () => {
                         <textarea id="artistBio" {...register("artistBio", { required: true })} />
                         {errors.artistBio && <span>This field is required</span>}
                     </div>
-
                     <div className="form-group">
-                        <label htmlFor="file">Portfolio File (optional)</label>
-                        <input type="file" id="file" {...register("file")} />
-                        {/* No validation error for optional file */}
+                        
+                        <label htmlFor="file">Portfolio File (optional)*</label>
+                        <p className='asterisk'> Please include your name in the portfolio file name</p>
+                        <p className='asterisk'>* For large files (videos, files larger than 10 MB), please email composantm@gmail.com with your Portfolio file(s) as an attachement and your name in the subject</p>
+                        <Widget
+                            publicKey="cfdb03f9e709e945d733"
+                            id="file"
+                            onChange={(fileInfo) => setFileUrl(fileInfo.cdnUrl)}
+                        />
+                        {fileUrl && <p>File uploaded successfully: <a href={fileUrl}>View File</a></p>}
                     </div>
 
                     <div className="form-group">

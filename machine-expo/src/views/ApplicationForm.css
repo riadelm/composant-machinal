@@ -54,7 +54,7 @@
 }
 
 .application-form {
-    background-color:  rgba(40, 39, 42, 0.668);
+    background-color:  rgba(40, 39, 42, 0.750);
     padding: 2rem;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
@@ -81,6 +81,26 @@
     font-weight: 300; /* Emphasize labels */
 }
 
+.uploadcare--widget__button {
+    background-color: #333;
+    color: #e5e5e5!;
+    font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif!; /* Example using Roboto, ensure it's included in your project */
+    transition: background-color color 0.2s;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.uploadcare--widget__button:hover {
+    background-color: #fff;
+    color: #333;
+}
+
+
+.asterisk {
+    font-size: 0.775rem;
+    margin-bottom: .5rem;
+}
+
 .form-group input[type="text"],
 .form-group input[type="email"],
 .form-group input[type="date"],
@@ -88,19 +108,27 @@
 .form-group input[type="file"] {
     width: 100%; /* Full width inputs */
     padding: 10px;
-    border: 1px solid #ccc; /* Subtle border */
+    border:rgba(40, 39, 42, 0.668); /* Subtle border */
     border-radius: 4px; /* Rounded corners */
     margin-bottom: .5rem; /* Space for potential error message */
+    background-color: rgba(37, 35, 40, 0.668);
+    color: #e5e5e5;
+    font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif; /* Example using Roboto, ensure it's included in your project */
 }
 
 .form-group textarea {
     height: 120px; /* Larger text area for bio */
     resize: vertical; /* Allow vertical resizing */
+    background-color: rgba(37, 35, 40, 0.668);
+    color: #e5e5e5;
+    font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif; /* Example using Roboto, ensure it's included in your project */
 }
 
 /* Styling for radio buttons and conditional text input */
 .form-group input[type="radio"] {
     margin-right: 5px; /* Space out radio buttons */
+    color: #e5e5e5;
+    font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif; /* Example using Roboto, ensure it's included in your project */
 }
 
 button[type="submit"] {
@@ -112,6 +140,7 @@ button[type="submit"] {
     border-radius: 4px;
     width: 100%;
     font-size: 1rem;
+    font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 button[type="submit"]:hover {
