@@ -14,9 +14,7 @@ const root = createRoot(container);
 // Initial render: Render an element to the root.
 root.render(
   <React.StrictMode>
-    <BrowserRouter>
       <App />
-    </BrowserRouter>
   </React.StrictMode>
 );
 
