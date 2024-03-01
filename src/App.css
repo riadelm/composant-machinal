@@ -57,7 +57,7 @@ html, body, #root {
   margin: 20px;
   font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 400;
-  font-size: 52px; /* 52*/
+  font-size: 3.5rem; /* 52*/
   color: rgb(255, 255, 255);
   z-index: 1;
   transition: font-size color 0.5s ease;
@@ -71,7 +71,7 @@ html, body, #root {
   color: white; /* Adjust color as needed */
   font-family:"IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 400;
-  font-size: 48px; /* 48*/
+  font-size: 3.5rem; /* 48*/
   z-index: 1;
   text-decoration: none; /* Remove underline by default */
   cursor: pointer;
@@ -100,7 +100,7 @@ html, body, #root {
 }
 
 .title:hover {
-  font-size: 52px;
+  font-size: 3.5rem;
   color: rgb(255, 255, 255);
 }
 
