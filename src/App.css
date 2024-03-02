@@ -50,7 +50,7 @@ html, body, #root {
   color: #61dafb;
 }
 
-.title {
+/* .title {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,16 +58,17 @@ html, body, #root {
   font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 400;
   font-size: 3.5rem; /* 52*/
-  color: rgb(255, 255, 255);
+  /* color: rgb(255, 255, 255);
   z-index: 1;
   transition: font-size color 0.5s ease;
-}
+} */ 
 
 .apply-button {
   position: absolute;
   bottom: 0;
   left: 0;
   margin: 20px;
+  padding: 10px 20px; /* Add some padding */
   color: white; /* Adjust color as needed */
   font-family:"IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif;
   font-weight: 400;
@@ -75,6 +76,7 @@ html, body, #root {
   z-index: 1;
   text-decoration: none; /* Remove underline by default */
   cursor: pointer;
+  transition: all 0.5s ease; /* Smooth transition */
 }
 
 .apply-button:hover {
@@ -92,16 +94,64 @@ html, body, #root {
   transition: backdrop-filter 0.2s ease;
 }
 
-.title:hover ~ .overlay {
-  backdrop-filter: blur(30px) brightness(80%); /* Apply blur when title is hovered */
+.overlay.blur {
+  backdrop-filter: blur(30px) brightness(50%);
+}
+
+.title-container:hover ~ .overlay {
+  backdrop-filter: blur(30px) brightness(50%); /* Apply blur when title is hovered */
 }
 .apply-button:hover ~ .overlay {
   backdrop-filter: blur(30px) brightness(50%); /* Apply blur when title is hovered */
 }
 
-.title:hover {
+.title-container:hover {
   font-size: 3.5rem;
   color: rgb(255, 255, 255);
+}
+
+
+.title-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  margin: 20px;
+  font-family: "IBM Plex Mono", monospace, "Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 3.5rem;
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+  transition: all 0.5s ease; /* Smooth transition */
+  max-width: calc(100% - 40px); /* Considering margins */
+  max-height: calc(100% - 30%); /* Considering the space for the "Apply" button */
+  overflow: auto; /* Make it scrollable */
+  z-index: 1;
+  padding-bottom: 100px;
+}
+
+.info-text {
+  font-size: 1rem; /* Adjust for the information text */
+  white-space: pre-wrap; /* Preserve formatting */
+  transition: opacity 0.5s ease; /* Smooth transition for text appearance */
+  padding-right: 10px;
+  margin: 20px;
+  max-height: 70vh; /* Adjust based on your layout to prevent overlap */
+  margin-right: 20px; /* Ensure some space on the right */
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+@media screen and (max-width: 768px) {
+  .title-container, .title-container:hover{
+    font-size: 2.5rem; /* Smaller font size on smaller screens */
+  }
+
+  .info-text {
+    font-size: 0.7rem;
+  }
+  
+  .apply-button {
+    font-size: 2.5rem; /* Smaller "Apply" button text on smaller screens */
+  }
 }
 
 
