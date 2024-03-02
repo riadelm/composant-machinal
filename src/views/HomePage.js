@@ -14,15 +14,45 @@ const HomePage = () => {
 
 
   useEffect(() => {
+    const randomChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()_+{}|:<>?-=[];',./≤≥÷æ…πøˆ¨¥†®´∑åß∂ƒ©˙∆µ˜∫√ç≈0123456789";
+    const getRandomChar = () => randomChars[Math.floor(Math.random() * randomChars.length)];
+
+    const typeNextChar = (index) => {
+        if (index < infoText.length) {
+            const nextChar = infoText.charAt(index);
+            let randomCharUpdates = 3; // Number of random char updates before showing actual char
+
+            // Function to update with a random char or the actual char
+            const updateChar = (isFinal = false) => {
+                setTypedText((text) => {
+                    // Replace last character with either random char or actual char
+                    let newText = text.slice(0, -1) + (isFinal ? nextChar : getRandomChar());
+                    return newText;
+                });
+
+                if (!isFinal) {
+                    randomCharUpdates--;
+                    if (randomCharUpdates > 0) {
+                        setTimeout(() => updateChar(), 30); // Schedule next random char update
+                    } else {
+                        setTimeout(() => updateChar(true), 30); // Schedule the actual char update
+                    }
+                } else {
+                    setTypingIndex(index + 1); // Proceed to next character
+                }
+            };
+
+            // Start updating with random chars
+            setTypedText((text) => text + ' '); // Add space for the randomChar to replace
+            updateChar();
+        }
+    };
+
     if (showInfo && typingIndex < infoText.length) {
-      const timeoutId = setTimeout(() => {
-        setTypedText((text) => text + infoText.charAt(typingIndex));
-        setTypingIndex(typingIndex + 1);
-      }, 35); // Adjust speed as needed
-      return () => clearTimeout(timeoutId);
+        typeNextChar(typingIndex);
     } else if (!showInfo) {
-      setTypedText('');
-      setTypingIndex(0); // Reset typing index when hiding info
+        setTypedText('');
+        setTypingIndex(0); // Reset when hiding info
     }
   }, [showInfo, typingIndex, infoText]);
 
