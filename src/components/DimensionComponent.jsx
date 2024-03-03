@@ -1,5 +1,5 @@
 import React, { useRef, useMemo, useEffect, useCallback} from 'react';
-import { useFrame, useThree } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 // import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 import vertexShader from '../shaders/vertexShader.js';
