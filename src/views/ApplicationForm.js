@@ -6,6 +6,7 @@ import DimensionComponent from '../components/DimensionComponent';
 import { Canvas } from '@react-three/fiber';
 import * as LR from '@uploadcare/blocks';
 import { Widget } from '@uploadcare/react-widget';
+import { useNavigate } from 'react-router-dom'; 
 
 LR.registerBlocks(LR);
 
@@ -14,6 +15,8 @@ const ApplicationForm = () => {
     const isAffiliated = watch("affiliation", "no"); // Watching the radio button
     const { innerWidth: width, innerHeight: height } = window;
     const [fileUrl, setFileUrl] = useState('')
+    const [showSuccessAnimation, setShowSuccessAnimation] = useState(false); // New state for the animation
+    const navigate = useNavigate(); // Initialize navigate function
 
     const onSubmit = data => {
         console.log(data);
@@ -30,12 +33,15 @@ const ApplicationForm = () => {
             affiliationDetails: data.affiliationDetails,
             additionalInfo: data.additionalInfo
         };
-        console.log(formData)
 
         emailjs.send('service_xv9wkqe', 'template_zujncxw', formData, 'slEBWGhWka7S9f55f')
             .then((result) => {
                 console.log(result.text);
-                alert("Application submitted successfully!");
+                setShowSuccessAnimation(true); // Show success animation
+                setTimeout(() => {
+                    setShowSuccessAnimation(false); // Hide animation after it's done
+                    navigate('/'); // Redirect to homepage
+                }, 2500); // Adjust the timeout to match your animation duration
             }, (error) => {
                 console.log(error.text);
                 alert("Failed to submit the application. Please try again.");
@@ -120,6 +126,7 @@ const ApplicationForm = () => {
                     
                     <button type="submit">Submit Application</button>
                 </form>
+                {showSuccessAnimation && <div className="success-animation">✔</div>}
             </div>
         </div>
     );

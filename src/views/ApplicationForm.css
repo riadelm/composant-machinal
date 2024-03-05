@@ -153,6 +153,40 @@ span {
     font-size: 0.875rem; /* Smaller font size for errors */
 }
 
+.dim-background {
+    background-color: rgba(0, 0, 0, 0.694);
+}
+
+.success-animation {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    color: rgb(0, 204, 0);
+    animation: checkmark 1s ease forwards;
+    z-index: 100;
+}
+
+@keyframes checkmark {
+    0% {
+        opacity: 0;
+        transform: scale(0.5) translate(-50%, -50%);
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+        transform: scale(1.2) translate(-50%, -50%);
+    }
+}
+
+/* Ensure the rest of the page is clickable when the success animation is not active */
+.success-animation:not(:empty) {
+    pointer-events: none;
+}
+
 @media (max-width: 768px) {
     .form-container {
         width: 90vw; /* Adjust form width on smaller screens */
