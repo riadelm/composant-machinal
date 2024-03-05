@@ -29,6 +29,7 @@ const ApplicationForm = () => {
             artistBio: data.artistBio,
             fileUrl: fileUrl,
             //upload file request from dropbox or ask for follow up email with 
+            projectDesc: data.projectDesc,
             affiliation: data.affiliation,
             affiliationDetails: data.affiliationDetails,
             additionalInfo: data.additionalInfo
@@ -93,15 +94,20 @@ const ApplicationForm = () => {
                     </div>
                     <div className="form-group">
                         
-                        <label htmlFor="file">Portfolio File (optional)*</label>
-                        <p className='asterisk'> Please include your name in the portfolio file name</p>
-                        <p className='asterisk'>* For large files (videos, files larger than 10 MB), please email composantm@gmail.com with your Portfolio file(s) as an attachement and your name in the subject</p>
+                        <label htmlFor="file">Project Documentation / Proposal *</label>
+                        <p className='asterisk'>PDF is prefered. Please include your name in the file name</p>
+                        <p className='asterisk'>* For large files/video (≥10 MB), or for multiple submissions, please email composantm@gmail.com with your file(s) as an attachement and your name in the subject</p>
                         <Widget
                             publicKey="cfdb03f9e709e945d733"
                             id="file"
                             onChange={(fileInfo) => setFileUrl(fileInfo.cdnUrl)}
                         />
                         {fileUrl && <p>File uploaded successfully: <a href={fileUrl}>View File</a></p>}
+                    </div>
+
+                    <div className="form-group">
+                        <label htmlFor="projectDesc">Work Description (incl. size, medium, year, installation needs)</label>
+                        <textarea id="projectDesc" {...register("projectDesc")} />
                     </div>
 
                     <div className="form-group">
@@ -120,7 +126,7 @@ const ApplicationForm = () => {
                     )}
 
                     <div className="form-group">
-                        <label htmlFor="additionalInfo">Any additional information/questions? (Ex: social media handle, links to portfolio, video, proposal, etc.)</label>
+                        <label htmlFor="additionalInfo">Additional information/questions? (Ex: links to portfolio, artist CV, other works, social media handle, etc.)</label>
                         <textarea id="additionalInfo" {...register("additionalInfo")} />
                     </div>
                     
