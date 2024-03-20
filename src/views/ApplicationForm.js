@@ -57,7 +57,7 @@ const ApplicationForm = () => {
             <div className="form-container">
                 <form className="application-form" onSubmit={handleSubmit(onSubmit)}>
                     <h2>Open Call for Artists - Application Form</h2>
-                    <h2>Deadline: March 31st 2024</h2>
+                    <h2>Deadline: April 15th 2024</h2>
                     <div className="form-group">
                         <label htmlFor="fullName">Full Name</label>
                         <input type="text" id="fullName" {...register("fullName", { required: true })} />
